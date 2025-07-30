@@ -4,7 +4,7 @@
 // import { io } from "socket.io-client";
 
 const API_BASE_URL = "https://ramenb.onrender.com/api/v1";
-const authToken = localStorage.getItem("token"); // For admin/cashier authentication
+const authToken = localStorage.getItem("authToken"); // For admin/cashier authentication
 
 let loadedOrders = [];
 

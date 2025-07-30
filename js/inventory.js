@@ -1,4 +1,5 @@
-// Remove the 'var user' declaration and use the global 'user' variable from the HTML script
+// Check user authentication and role
+const user = JSON.parse(localStorage.getItem('user') || '{}');
 if (!user.role || user.role !== 'admin') {
   window.location.href = 'pos.html';
 }
@@ -121,7 +122,7 @@ function changeInventoryPage(page) {
 }
 
 async function fetchInventory() {
-  const token = localStorage.getItem('token');
+  const token = localStorage.getItem('authToken');
   const tbody = document.getElementById('ingredientsTableBody');
   if (!token) {
     if (tbody) tbody.innerHTML = '<tr><td colspan="6" class="text-danger">You must be logged in to view inventory.</td></tr>';
@@ -227,7 +228,7 @@ document.addEventListener('DOMContentLoaded', () => {
     
     form.addEventListener('submit', async (e) => {
       e.preventDefault();
-      const token = localStorage.getItem('token');
+      const token = localStorage.getItem('authToken');
       if (!token) {
         document.getElementById('addIngredientError').textContent = 'You must be logged in.';
         document.getElementById('addIngredientError').style.display = 'block';
@@ -284,7 +285,7 @@ document.addEventListener('DOMContentLoaded', () => {
     
     editForm.addEventListener('submit', async (e) => {
       e.preventDefault();
-      const token = localStorage.getItem('token');
+      const token = localStorage.getItem('authToken');
       if (!token) {
         document.getElementById('editIngredientError').textContent = 'You must be logged in.';
         document.getElementById('editIngredientError').style.display = 'block';
@@ -389,7 +390,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 // Open edit modal and populate fields
 async function openEditModal(id) {
-  const token = localStorage.getItem('token');
+  const token = localStorage.getItem('authToken');
   if (!token) {
     Swal.fire('Error', 'You must be logged in.', 'error');
     return;
@@ -427,7 +428,7 @@ async function openEditModal(id) {
 
 // Populate ingredients list for menu creation
 async function populateIngredientsList() {
-  const token = localStorage.getItem('token');
+  const token = localStorage.getItem('authToken');
   if (!token) return;
   
   try {
@@ -507,7 +508,7 @@ async function handleDelete(id) {
     confirmButtonText: 'Yes, delete it!'
   }).then(async (result) => {
     if (result.isConfirmed) {
-      const token = localStorage.getItem('token');
+      const token = localStorage.getItem('authToken');
       if (!token) return;
       try {
         const response = await fetch(DELETE_URL + id, {

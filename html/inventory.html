@@ -147,6 +147,32 @@
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   <script src="../js/inventory.js"></script>
 
+  <script>
+    // Sidebar toggle for mobile
+    const sidebarToggle = document.getElementById('sidebarToggle');
+    const sidebarMenu = document.getElementById('sidebarMenu');
+    const closeSidebar = document.getElementById('closeSidebar');
+
+    if (sidebarToggle && sidebarMenu) {
+      sidebarToggle.addEventListener('click', () => {
+        sidebarMenu.classList.toggle('show');
+      });
+    }
+    
+    if (closeSidebar && sidebarMenu) {
+      closeSidebar.addEventListener('click', () => {
+        sidebarMenu.classList.remove('show');
+      });
+    }
+    
+    // Close sidebar when clicking outside on mobile
+    document.addEventListener('click', (e) => {
+      if (window.innerWidth < 768 && sidebarMenu && !sidebarMenu.contains(e.target) && !sidebarToggle.contains(e.target)) {
+        sidebarMenu.classList.remove('show');
+      }
+    });
+  </script>
+
   <!-- Add Ingredient Modal -->
   <div class="modal fade" id="addIngredientModal" tabindex="-1" aria-labelledby="addIngredientModalLabel" aria-hidden="true">
     <div class="modal-dialog">
