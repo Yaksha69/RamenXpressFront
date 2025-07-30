@@ -8,3 +8,6 @@
 |---------|--------------|------------|
 | Admin   | admin        | admin123   |
 | Cashier | cashier      | cashier123 |
+
+
+Link: https://ramenxpressfront.onrender.com/login.html
